@@ -1,0 +1,48 @@
+Overview
+========
+
+ImportKey is a patched version of 
+
+http://www.agentbob.info/agentbob/80/version/default/part/AttachmentData/data/ImportKey.java 
+
+with the certificate chain import code fixed.
+
+
+Requirements
+============
+* Java 1.5+
+
+
+Pre-Flight Instructions
+=======================
+
+* Make sure all keys/certs are in .der format
+    
+    openssl pkcs8 -topk8 -nocrypt -in key.pem -inform PEM -out key.der -outform DER
+    openssl x509 -in cert.pem -inform PEM -out cert.der -outform DER
+
+* For certificate chains: cat all the certs together
+
+    cat cert.der server-chain2.der server-chain1.der ct_root.der > certs.der
+
+* Build ImportKey
+
+    javac ImportKey.java
+
+
+Usage
+=====
+
+   java ImportKey <private key> <certificate> [<alias>]
+
+
+Example
+=======
+
+   java ImportKey key.der cert.der "My Alias"
+
+
+Thanks
+======
+
+Kudos to Jochen Seifarth http://www.agentbob.info/ for creating ImportKey which works around keytool's stupid limitations.
