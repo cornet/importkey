@@ -42,6 +42,18 @@ Example
    java ImportKey key.der cert.der "My Alias"
 
 
+Changing the Keystore password
+==============================
+
+To change the Keystore password to something else you use keytool which is supplied with Sun Java.
+
+So to change it from *importkey* to *mypassword* you would do the following:
+ keytool -storepasswd -v -keystore ~/keystore.ImportKey -storepass importkey -new mypassword
+
+Also we generally want to change the keypass to the same as the storepass (it too will be set to *importkey*:
+ keytool -keypasswd -v -alias "My Alias" -keystore ~/keystore.ImportKey -storepass mypassword -keypass importkey -new mypassword
+
+
 Thanks
 ======
 
